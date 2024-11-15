@@ -1,0 +1,42 @@
+SELECT FUNCTIONS RESULTING IN COLUMN HEADERS
+
+		SELECT
+			CONVERT(VARCHAR(30), '0 - 12 Month') AS [Category],
+			@KeyYearDateStart AS [Rolling Year Begin],
+			@KeyYearDateEnd AS [Rolling Year End],
+			COUNT(*) AS [Count],
+			COUNT(CASE [Orders] WHEN 1 THEN [Orders] ELSE NULL END) AS [1-Time buyer],
+			COUNT(CASE [Orders] WHEN 2 THEN [Orders] ELSE NULL END) AS [2-Time buyer],
+			COUNT(CASE WHEN [Orders] < 3 THEN NULL ELSE [Orders] END) AS [3x+ buyer],
+			SUM(CASE [NTF] WHEN 0 THEN [NTF] ELSE 1 END) AS [Acquired],
+			COUNT([R2]) AS [Retained from 13-24 mo],
+			COUNT([R3]) AS [Retained from 25-36 mo],
+			COUNT([R4]) AS [Retained from 37+ mo],
+			SUM([Orders]) AS [Orders],
+			SUM([Orders]) AS [Aggregate Orders],
+			SUM([Total Demand]) AS [Total Demand],
+			SUM([Total Demand]) AS [Aggregate Total Demand],
+			SUM([Total Units]) AS [Total Units],
+			SUM([Total Units]) AS [Aggregate Total Units],
+			COUNT(CASE WHEN ([AOV] < 70) THEN [Orders] ELSE NULL END) AS [AOV_0_70],
+			COUNT(CASE WHEN ([AOV] BETWEEN 70 AND 99.99) THEN [Orders] ELSE NULL END) AS [AOV_70_100],
+			COUNT(CASE WHEN ([AOV] BETWEEN 100 AND 144.99) THEN [Orders] ELSE NULL END) AS [AOV_100_145],
+			COUNT(CASE WHEN ([AOV] >= 145) THEN [Orders] ELSE NULL END) AS [AOV_145_PLUS]
+
+SUB-QUERY: CUSTOMER PRE_ROLLUP
+
+				SELECT
+					 RTRIM([#RollupBase].[CUST_NO]) AS [CUST_NO]
+					,RTRIM([Y1_R2].[CUST_NO]) AS [R2]
+					,RTRIM([Y1_R3].[CUST_NO]) AS [R3]
+					,RTRIM([Y1_R4].[CUST_NO]) AS [R4]
+					,COUNT(*) AS [Orders]
+					,COUNT(CASE [INIT_PURCH] WHEN 'Y' THEN [INIT_PURCH] ELSE NULL END) AS [NTF]
+					,SUM([DEMAND]) AS [Total Demand]
+					,SUM([UNITS]) AS [Total Units]
+
+				GROUP BY
+					 RTRIM([#RollupBase].[CUST_NO])
+					,RTRIM([Y1_R2].[CUST_NO])
+					,RTRIM([Y1_R3].[CUST_NO])
+					,RTRIM([Y1_R4].[CUST_NO])
