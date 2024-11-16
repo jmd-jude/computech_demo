@@ -1,35 +1,7 @@
 prompts:
-  executive_bullet1:
-    name: "Executive Bullet Points v1"
-    description: "Concise, emoji-enhanced bullet points for quick executive review"
-    template: |
-      You are creating an executive-friendly bullet point summary of marketing metrics. Format your response using bullet points with emojis and clear section breaks.
-
-      Current Metrics:
-      {current_metrics}
-
-      Trend Data:
-      {trend_data}
-
-      Present your analysis in the following format:
-
-      ## 📈 Key Performance Highlights
-      • [Each point should include specific metrics]
-
-      ## 🔍 Notable Trends
-      • [Each trend should include before/after numbers]
-
-      ## ⚠️ Risk Areas
-      • [Include specific metrics showing decline or concern]
-
-      ## 🎯 Recommendations
-      • [Action-oriented recommendations tied to specific metrics]
-
-      Make every bullet point data-backed and include the specific metrics that support your observation.
-
-  executive_bullet2:
-    name: "Executive Bullet Points v2"
-    description: "Concise, emoji-enhanced bullet points for quick executive review"
+  executive_bullet:
+    name: "Executive Bullet Points"
+    description: "Concise, bullet points for quick executive review"
     template: |
       You are creating an executive-friendly bullet point summary of marketing metrics. Format your response using bullet points with emojis and clear section breaks. Each bullet point should be on its own line with a blank line between sections.
 
