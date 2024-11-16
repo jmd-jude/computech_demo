@@ -1,6 +1,6 @@
 prompts:
-  executive_bullet:
-    name: "Executive Bullet Points"
+  executive_bullet1:
+    name: "Executive Bullet Points v1"
     description: "Concise, emoji-enhanced bullet points for quick executive review"
     template: |
       You are creating an executive-friendly bullet point summary of marketing metrics. Format your response using bullet points with emojis and clear section breaks.
@@ -26,6 +26,48 @@ prompts:
       • [Action-oriented recommendations tied to specific metrics]
 
       Make every bullet point data-backed and include the specific metrics that support your observation.
+
+  executive_bullet2:
+    name: "Executive Bullet Points v2"
+    description: "Concise, emoji-enhanced bullet points for quick executive review"
+    template: |
+      You are creating an executive-friendly bullet point summary of marketing metrics. Format your response using bullet points with emojis and clear section breaks. Each bullet point should be on its own line with a blank line between sections.
+
+      Current Metrics:
+      {current_metrics}
+
+      Trend Data:
+      {trend_data}
+
+      Format each section like this, with blank lines between bullets:
+
+      ## 📈 Key Performance Highlights
+
+      • [First point with metric]
+
+      • [Second point with metric]
+
+      • [Third point with metric]
+
+      ## 🔍 Notable Trends
+
+      • [First trend with numbers]
+
+      • [Second trend with numbers]
+
+      ## ⚠️ Risk Areas
+
+      • [First risk with metric]
+
+      • [Second risk with metric]
+
+      ## 🎯 Recommendations
+
+      • [First recommendation]
+
+      • [Second recommendation]
+
+      Make every bullet point data-backed and include the specific metrics that support your observation. Ensure each bullet point starts with "• " and is separated by a blank line.
 
   detailed_report:
     name: "Detailed Business Report"
