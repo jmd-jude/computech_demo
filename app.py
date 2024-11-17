@@ -54,7 +54,7 @@ def generate_analysis(data, selected_prompt):
     return response.content
 
 def main():
-    st.title("Computech Database Metrics Dashboard")
+    st.title("Database Metrics Dashboard")
     
     tab1, tab2 = st.tabs(["Standard Metrics", "Custom Query"])
     
@@ -116,7 +116,7 @@ def main():
                                  format_percent(retention['Retention_Rate'].mean()))
                     with col2:
                         revenue = data['REVENUE_GROWTH']
-                        st.metric("Revenue Growth", 
+                        st.metric("YOY Revenue Growth", 
                                  format_percent(revenue['Revenue_Growth'].mean()))
                     with col3:
                         arpc = data['REVENUE_PER_CUSTOMER']
@@ -151,10 +151,28 @@ def main():
     with tab2:
         st.header("Ask Questions About Your Data")
         
+        with st.expander("Example Questions", expanded=True):
+            st.markdown("""
+            **Simple Questions:**
+            - Show me total revenue by product category in 2024
+            - What is the average order value for each product category?
+            - How many customers do we have in each segment?
+            
+            **Intermediate Questions:**
+            - Compare retention rates across product categories
+            - Show me product categories with highest percentage of multi-buyers
+            - What is the trend of high-value customers across categories?
+            
+            **Complex Questions:**
+            - What is the month-over-month revenue growth by product category?
+            - Compare revenue contribution of new vs retained customers
+            - Show categories where retention improved but revenue declined
+            """)
+        
         with st.form(key="query_form"):
             col1, col2 = st.columns([6, 1])
             with col1:
-                user_question = st.text_input("Enter your question about the data:")
+                user_question = st.text_input("Try it out! Enter a question:")
             with col2:
                 st.write("")  # Spacer
                 clear = st.form_submit_button("Clear")
